@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu | Tacos Al Vapor Michoacan</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='menu.css') }}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <main class="page">
+
+    <!-- Tabs -->
+    <nav class="tabs" aria-label="Menu Sections">
+      {% for s in sections %}
+        <a class="tab {% if loop.first %}active{% endif %}"
+           href="#{{ s.id }}"
+           data-target="{{ s.id }}"
+           data-accent="{{ s.accent }}">
+          {{ s.label }}
+        </a>
+      {% endfor %}
+    </nav>
+
+    <!-- Sections -->
+    {% for s in sections %}
+    <section id="{{ s.id }}" class="menu-section" data-section="{{ s.id }}" data-accent="{{ s.accent }}">
+      <p class="hours">{{ s.hours }}</p>
+
+      <div class="grid">
+        {% for col in s.columns %}
+        <div class="col">
+          <h2 style="text-align: center;" class="section-title">{{ col.title }}</h2>
+
+          {% for item in col["items"] %}
+          <div class="item">
+            <h3 class="item-name">{{ item.name }}</h3>
+            {% if item.desc %}
+              <p class="item-desc">{{ item.desc }}</p>
+            {% endif %}
+            <p class="item-price">{{ item.price }}</p>
+          </div>
+          {% endfor %}
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    {% endfor %}
+
+    <div class="footer-actions">
+      <a class="back" href="{{ url_for('home') }}">← Back to Home</a>
+    </div>
+
+  </main>
+
+  <script>
+    const root = document.documentElement;
+    const tabs = Array.from(document.querySelectorAll('.tab'));
+    const sections = Array.from(document.querySelectorAll('.menu-section'));
+
+    function setActiveTabBySectionId(sectionId) {
+      const activeTab = tabs.find(t => t.dataset.target === sectionId);
+      if (!activeTab) return;
+
+      tabs.forEach(t => t.classList.toggle('active', t === activeTab));
+
+      // Change theme color based on active section
+      const accent = activeTab.dataset.accent || "#9a5a43";
+      root.style.setProperty('--accent', accent);
+    }
+
+    // Smooth scroll + set active immediately on click
+    tabs.forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = tab.getAttribute('href');
+        const el = document.querySelector(id);
+        if (!el) return;
+
+        setActiveTabBySectionId(tab.dataset.target);
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Observe which section is active while scrolling
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (!visible) return;
+      setActiveTabBySectionId(visible.target.dataset.section);
+    }, {
+      threshold: [0.25, 0.4, 0.6],
+      rootMargin: "-20% 0px -60% 0px"
+    });
+
+    sections.forEach(s => observer.observe(s));
+
+    // Initialize accent from first tab
+    if (tabs[0]) setActiveTabBySectionId(tabs[0].dataset.target);
+  </script>
+</body>
+</html>

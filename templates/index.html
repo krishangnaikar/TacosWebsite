@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tacos Al Vapor Michoacan</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <!-- Optional fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- HEADER (animated) -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a class="brand" href="/">
+        <span class="brand-title">Tacos Al Vapor</span>
+        <span class="brand-subtitle">Michoacan</span>
+      </a>
+
+      <nav class="nav">
+        <a href="{{ url_for('menu') }}">Menu</a>
+        <a href="#private-dining">Private Dining</a>
+        <a href="#catering">Catering</a>
+        <a href="#food-truck">Food Truck</a>
+        <a href="#gift-cards">Gift Cards</a>
+        <a href="#reservations">Reservations</a>
+      </nav>
+
+      <a class="cta" href="#reservations">Order Online</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <!-- Put your hero image in: static/images/hero.jpg -->
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <h1>Authentic Michoacán-Style Tacos</h1>
+      <p>Steamed tacos, fresh salsas, and homestyle plates — made daily.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="{{ url_for('menu') }}">View Menu</a>
+        <a class="btn ghost" href="#gallery">See Photos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDING GALLERY -->
+  <section id="gallery" class="section">
+    <div class="section-head">
+      <h2>Featured Plates</h2>
+      <p>Tap arrows to slide. Swiping works on mobile.</p>
+    </div>
+
+    <div class="slider" aria-label="Food gallery">
+      <button class="slider-btn prev" aria-label="Previous" id="prevBtn">‹</button>
+
+      <div class="slider-track" id="sliderTrack">
+        <!-- Put images in static/images/ and update these filenames -->
+        <article class="card">
+          <img src="{{ url_for('static', filename='images/tacos.png') }}" alt="Tacos" />
+          <div class="card-body">
+            <h3>Tacos al Vapor</h3>
+            <p>Steamed tortillas, salsa roja, onion, cilantro.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="{{ url_for('static', filename='images/barbacoa.png') }}" alt="Barbacoa" />
+          <div class="card-body">
+            <h3>Barbacoa</h3>
+            <p>Slow-cooked beef, lime, and fresh salsas.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="{{ url_for('static', filename='images/carnitas.png') }}" alt="Carnitas" />
+          <div class="card-body">
+            <h3>Carnitas</h3>
+            <p>Crispy pork, pico de gallo, salsa verde.</p>
+          </div>
+        </article>
+
+        <!-- Optional more cards -->
+        <article class="card">
+          <img src="{{ url_for('static', filename='images/birria.png') }}" alt="Birria" />
+          <div class="card-body">
+            <h3>Birria</h3>
+            <p>Rich consomé, melty cheese, and dipping.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="{{ url_for('static', filename='images/elote.png') }}" alt="Elote" />
+          <div class="card-body">
+            <h3>Elote</h3>
+            <p>Street corn, crema, cotija, chile.</p>
+          </div>
+        </article>
+      </div>
+
+      <button class="slider-btn next" aria-label="Next" id="nextBtn">›</button>
+    </div>
+  </section>
+
+  <!-- SIMPLE SECTIONS (placeholders) -->
+  <section id="private-dining" class="section simple">
+    <h2>Private Dining</h2>
+    <p>Host your next gathering with us — ask about group menus.</p>
+  </section>
+
+  <section id="catering" class="section simple">
+    <h2>Catering</h2>
+    <p>Taco bars, trays, and party packages available.</p>
+  </section>
+
+  <section id="food-truck" class="section simple">
+    <h2>Food Truck</h2>
+    <p>Book us for events, festivals, and corporate lunches.</p>
+  </section>
+
+  <section id="gift-cards" class="section simple">
+    <h2>Gift Cards</h2>
+    <p>Gift cards available in-store. Coming soon online.</p>
+  </section>
+
+  <section id="reservations" class="section simple">
+    <h2>Reservations</h2>
+    <p>Walk-ins welcome. For large parties, contact us.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h3>Social</h3>
+        <div class="footer-links">
+          <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://twitter.com" target="_blank" rel="noopener">X</a>
+        </div>
+      </div>
+
+      <div>
+        <h3>Contact</h3>
+        <div class="footer-links">
+          <a href="tel:+14085551234">(408) 555-1234</a>
+          <a href="mailto:hello@tacosalvapor.com">hello@tacosalvapor.com</a>
+        </div>
+      </div>
+
+      <div>
+        <h3>Location</h3>
+        <p class="footer-text">131 Main St, Los Altos, CA 94022</p>
+        <a class="footer-map" href="https://maps.google.com/?q=131+Main+St,+Los+Altos,+CA+94022" target="_blank" rel="noopener">
+          Open in Maps →
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Tacos Al Vapor Michoacan</p>
+    </div>
+  </footer>
+
+  <script>
+    // year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // header animation on scroll
+    const header = document.getElementById('siteHeader');
+    const onScroll = () => {
+      if (window.scrollY > 12) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // slider
+    const track = document.getElementById('sliderTrack');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function scrollByCard(dir) {
+      const card = track.querySelector('.card');
+      if (!card) return;
+      const gap = parseInt(getComputedStyle(track).gap || "16", 10);
+      const amount = card.getBoundingClientRect().width + gap;
+      track.scrollBy({ left: dir * amount, behavior: 'smooth' });
+    }
+
+    prevBtn.addEventListener('click', () => scrollByCard(-1));
+    nextBtn.addEventListener('click', () => scrollByCard(1));
+
+    // Auto-slide (optional)
+    let auto = setInterval(() => scrollByCard(1), 4500);
+    track.addEventListener('mouseenter', () => clearInterval(auto));
+    track.addEventListener('mouseleave', () => auto = setInterval(() => scrollByCard(1), 4500));
+    track.addEventListener('touchstart', () => clearInterval(auto), { passive: true });
+  </script>
+</body>
+</html>
